@@ -1,0 +1,21 @@
+body {
+    background-color: #ECEFF1;
+}
+
+.auth {
+    margin-top: 100px;
+    
+  }
+
+.auth {
+    width: 400px;
+    margin :0 auto;
+}
+
+.logo {
+   
+    text-align: center;
+    font-weight: 100;
+    font-size: 80px;
+    user-select: none;
+}

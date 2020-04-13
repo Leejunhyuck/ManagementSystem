@@ -1,4 +1,4 @@
-const initalState = {user:{userid:'user00', userpw:'p2',username:'홍길동'}}
+const initalState = {user:{userid:'user00', userpw:'p2',username:'홍길동',state:false}}
 
 function memberReducer(state = initalState, action) {
 
@@ -9,7 +9,8 @@ function memberReducer(state = initalState, action) {
     if(type === 'SUCCESS_LOGIN'){
         return {
             ...state,
-            user: payload
+            user: payload,
+            state:true
         }
     }
     

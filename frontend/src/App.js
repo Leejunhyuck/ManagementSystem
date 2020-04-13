@@ -6,6 +6,8 @@ import TList from './pages/TList';
 import TRegister from './pages/TRegister';
 import Nav from './components/Nav';
 import Login from './pages/Login';
+import H1 from './pages/h1'
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
       <Route path="/register" component ={TRegister}></Route>
       <Route path="/list/:page" component ={TList}></Route>
       <Route path="/login" component ={Login}></Route>
+      <Route path="/h1" component={H1} ></Route>
     </Router>
   );
 }
