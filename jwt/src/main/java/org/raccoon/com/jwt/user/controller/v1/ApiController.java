@@ -25,7 +25,7 @@ import graphql.ExecutionResult;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/*")
+@RequestMapping("api/user/*")
 @RequiredArgsConstructor
 @CrossOrigin
 public class ApiController{
@@ -54,14 +54,15 @@ public class ApiController{
     @PostMapping("signup")
     public ResponseEntity<Member> join (@RequestBody SignUpDto signDto){
         
-        Member member = new Member();
-        
-        //get set을 사용하지 않게 수정 필요
         String encryptPw = pwEncoder.encode(signDto.getPassword());
-        member.setUid(signDto.getId());
-        member.setUname(signDto.getName());
-        member.setPassword(encryptPw);
-        member.setRoles(signDto.getRoles());
+        
+        Member member =Member.builder()
+            .uid(signDto.getId())
+            .uname(signDto.getName())
+            .password(encryptPw)
+            .roles(signDto.getRoles())
+            .build();
+
         memberRepository.save(member);
 
         return new ResponseEntity<>(member,HttpStatus.CREATED);
