@@ -9,6 +9,7 @@ import lombok.ToString;
 @ToString
 public class TodoDto {
     private String uid;
+    private String jid;
     private String startTime;
     private String endTime;
     private String workContent;

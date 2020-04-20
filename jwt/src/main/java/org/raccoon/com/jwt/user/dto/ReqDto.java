@@ -11,6 +11,4 @@ import lombok.ToString;
 public class ReqDto {
     private String name;
     private String token;
-
-
 }
