@@ -63,9 +63,47 @@ public class BoardController {
     }
 
     @PostMapping("delete")
-    public void delete(){
+    public ResponseEntity<PageVO> delete(Long bno, PageDto pageDto){
+        log.info("delete..."+bno);
 
+        repo.deleteById(bno);
+
+        PageVO pageVO = PageVO.builder()
+                            .page(pageDto.getPage())
+                            .size(pageDto.getSize())
+                            .keyword(pageDto.getKeyword())
+                            .type(pageDto.getType())
+                            .build();
+
+
+        return new ResponseEntity<>(pageVO,HttpStatus.OK);
     }
+
+    @PostMapping("modify")
+    public ResponseEntity<PageVO> modify(BoardDto boardDto, PageDto pageDto){
+        log.info("modify..."+boardDto + pageDto);
+
+        repo.findById(boardDto.getBno()).ifPresent(origin -> {
+
+        origin.modifyBoard(boardDto.getTitle(),boardDto.getContent(),boardDto.getWriter());
+        
+        repo.save(origin);
+		
+        });
+        // 페이징과 검색했던 결과로 이동하는경우 처리 필요(PageVO)
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/view")
+	public ResponseEntity<Board> view(Long bno) {
+
+        log.info("BNO: " + bno);
+        
+        Board board = repo.findById(bno).orElseThrow(() -> new IllegalArgumentException("no such data"));
+
+        return new ResponseEntity<>(board,HttpStatus.OK);
+	}
 
 
 

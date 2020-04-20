@@ -3,11 +3,13 @@ package org.raccoon.com.jwt.board.domain;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
@@ -45,6 +47,11 @@ public class Board {
     @OneToMany(mappedBy ="board", fetch =FetchType.LAZY)
     private List<Reply> replies;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="pdsno")
+    private List<PDSfile> files;
+
+
     @Builder
     Board(Long bno, String title, String writer, String content, List<Reply> replies){
         this.bno = bno;
@@ -52,6 +59,12 @@ public class Board {
         this.content = content;
         this.writer = writer;
         this.replies = replies;
+    }
+
+    public void modifyBoard (String title, String writer, String content){
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
     }
     
 }
