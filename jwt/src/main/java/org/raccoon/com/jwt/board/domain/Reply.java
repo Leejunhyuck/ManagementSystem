@@ -22,8 +22,8 @@ import lombok.ToString;
 
 @Getter
 @Entity
-@Table(name ="webreplies")
-@EqualsAndHashCode(of ="rno")
+@Table(name = "webreplies")
+@EqualsAndHashCode(of = "rno")
 @ToString(exclude = "board")
 public class Reply {
     @Id
@@ -45,8 +45,14 @@ public class Reply {
     private Board board;
 
     @Builder
-    Reply(String replyText, String replyer){
-        this.replyText=replyText;
-        this.replyer=replyer;
+    Reply(String replyText, String replyer, Board board) {
+        this.replyText = replyText;
+        this.replyer = replyer;
+        this.board = board;
+    }
+
+    public void modifyReply (String replyText, String replyer){
+        this.replyText = replyText;
+        this.replyer = replyer;
     }
 }
