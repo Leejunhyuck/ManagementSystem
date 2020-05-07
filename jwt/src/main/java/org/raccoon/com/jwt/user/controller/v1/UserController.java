@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("api/user/*")
 @RequiredArgsConstructor
 @CrossOrigin
-public class ApiController{
+public class UserController{
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder pwEncoder;
